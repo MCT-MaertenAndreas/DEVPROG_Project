@@ -11,20 +11,11 @@ using Xamarin.Forms;
 
 namespace EindProject
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : MasterDetailPage
     {
         public MainPage()
         {
             InitializeComponent();
-
-            this.LoadLeaderboard();
-        }
-
-        private async void LoadLeaderboard()
-        {
-            Leaders leaders = await WakaTimeRepo.GetLeaders();
-
-            lvwLeaders.ItemsSource = leaders.users;
         }
 
         private async void TestModel()
