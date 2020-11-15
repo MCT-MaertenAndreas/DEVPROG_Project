@@ -30,6 +30,24 @@ namespace EindProject.Repositories
             return leaders;
         }
 
+        public static async Task<Stats> GetUserStats(string guid)
+        {
+            string sPath = $"/api/v1/users/{guid}/stats";
+
+            Stats stats;
+
+            using (var client = WakaTimeRepo.GetHttpClient())
+            {
+                string data = await client.GetStringAsync(WakaTimeRepo.sBaseURL + sPath);
+
+                if (data == null) return null;
+
+                stats = JsonConvert.DeserializeObject<Stats>(data);
+            }
+
+            return stats;
+        }
+
         private static HttpClient GetHttpClient()
         {
             HttpClient client = new HttpClient();
