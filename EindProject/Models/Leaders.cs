@@ -8,10 +8,10 @@ namespace EindProject.Models
     public class Leaders
     {
         [JsonProperty(PropertyName = "data")]
-        public List<Leader> users = new List<Leader>();
+        public List<Leader> Users = new List<Leader>();
         [JsonProperty(PropertyName = "page")]
-        public int page { get; set; }
+        public int Page { get; set; }
         [JsonProperty(PropertyName = "total_pages")]
-        public int totalPages { get; set; }
+        public int TotalPages { get; set; }
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:EindProject"
+			 x:Class="EindProject.MasterPage"
+			 Padding="0,40,0,0"
+			 IconImageSource="hamburger.png"
+			 Title="WakaTime Leaderboard">
+    <StackLayout>
+        <ListView x:Name="lvwNavigation" x:FieldModifier="public">
+           <!--<ListView.ItemsSource>
+                <x:Array Type="{x:Type local:MasterPageItem}">
+                    <local:MasterPageItem x:Name="lblLeaderboard" Title="Leaderboard" IconSource="leaderboard.png" TargetType="{x:Type local:LeaderboardPage}" />
+                    <local:MasterPageItem Title="Login" IconSource="todo.png" TargetType="{x:Type local:LoginPage}" />
+                    <local:MasterPageItem Title="Yimura" IconSource="reminders.png" TargetType="{x:Type local:UserPage}" />
+                </x:Array>
+            </ListView.ItemsSource>-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Image}" />
+                            <Label Grid.Column="1" Text="{Binding Title}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

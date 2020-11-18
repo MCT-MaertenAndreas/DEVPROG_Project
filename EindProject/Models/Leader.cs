@@ -8,24 +8,24 @@ namespace EindProject.Models
     public class RunningTotal
     {
         [JsonProperty(PropertyName = "total_seconds")]
-        public float totalSeconds { get; set; }
+        public float TotalSeconds { get; set; }
         [JsonProperty(PropertyName = "human_readable_total")]
-        public string humanReadableTotal { get; set; }
+        public string HumanReadableTotal { get; set; }
         [JsonProperty(PropertyName = "daily_average")]
-        public float dailAverage { get; set; }
+        public float DailyAverage { get; set; }
         [JsonProperty(PropertyName = "human_readable_daily_average")]
-        public string humanReadableDailyAverage { get; set; }
+        public string HumanReadableAverageDaily { get; set; }
         [JsonProperty(PropertyName = "languages")]
-        public List<Language> languages { get; set; }
+        public List<Language> Languages { get; set; }
     }
 
     public class Leader
     {
         [JsonProperty(PropertyName = "rank")]
-        public int rank { get; set; }
+        public int Rank { get; set; }
         [JsonProperty(PropertyName = "running_total")]
-        public RunningTotal runningTotal { get; set; }
+        public RunningTotal RunningTotal { get; set; }
         [JsonProperty(PropertyName = "user")]
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }

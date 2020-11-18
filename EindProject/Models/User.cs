@@ -8,26 +8,26 @@ namespace EindProject.Models
     public class User
     {
         [JsonProperty(PropertyName = "id")]
-        public string id { get; set; }
+        public string Id { get; set; }
         [JsonProperty(PropertyName = "email")]
-        public string email { get; set; }
+        public string Email { get; set; }
         [JsonProperty(PropertyName = "username")]
-        public string username { get; set; }
+        public string Username { get; set; }
         [JsonProperty(PropertyName = "full_name")]
-        public string fullName { get; set; }
+        public string Fullname { get; set; }
         [JsonProperty(PropertyName = "display_name")]
-        public string displayName { get; set; }
+        public string DisplayName { get; set; }
         [JsonProperty(PropertyName = "website")]
-        public string website { get; set; }
+        public string Website { get; set; }
         [JsonProperty(PropertyName = "human_readable_website")]
-        public string humanReadableWebsite;
+        public string HumanReadableWebsite;
         [JsonProperty(PropertyName = "location")]
-        public string location { get; set; }
+        public string Location { get; set; }
         [JsonProperty(PropertyName = "is_hireable")]
-        public bool isHireable { get; set; }
+        public bool IsHireable { get; set; }
         [JsonProperty(PropertyName = "photo")]
-        public string photo { get; set; }
+        public string Photo { get; set; }
         [JsonProperty(PropertyName = "photo_public")]
-        public bool isPhotoPublic { get; set; }
+        public bool IsPhotoPublic { get; set; }
     }
 }
