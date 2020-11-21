@@ -6,7 +6,7 @@
     <StackLayout>
         <SearchBar Placeholder="Search for users..." />
 
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="0" Padding="5">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="0" Padding="5,5,5,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
@@ -44,5 +44,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnBack" Grid.Column="0" Text="Previous Page"/>
+            <Label x:Name="lblPage"  Grid.Column="1" Text="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button x:Name="btnNext" Grid.Column="2" Text="Next Page"/>
+        </Grid>
     </StackLayout>
 </ContentPage>
