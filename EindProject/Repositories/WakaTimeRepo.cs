@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace EindProject.Repositories
 {
@@ -12,7 +13,7 @@ namespace EindProject.Repositories
     {
         private static string sBaseURL = "https://wakatime.com/";
 
-        public static async Task<Leaders> GetLeaders()
+        public static async Task<Leaders> GetLeaders(uint page = 1)
         {
             const string sPath = "/api/v1/leaders";
 
@@ -20,7 +21,7 @@ namespace EindProject.Repositories
 
             using (var client = WakaTimeRepo.GetHttpClient())
             {
-                string data = await client.GetStringAsync(WakaTimeRepo.sBaseURL + sPath);
+                string data = await client.GetStringAsync(WakaTimeRepo.sBaseURL + sPath + "?page="+ page);
 
                 if (data == null) return null;
 
@@ -51,7 +52,7 @@ namespace EindProject.Repositories
         private static HttpClient GetHttpClient()
         {
             HttpClient client = new HttpClient();
-            //client.DefaultRequestHeaders.Add("Authorization", sToken);
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Preferences.Get("token", ""));
 
             return client;
         }
