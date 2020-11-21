@@ -7,6 +7,9 @@ namespace EindProject.Models
 {
     public class Leaders
     {
+        [JsonProperty(PropertyName = "current_user")]
+        public Leader CurrentUser { get; set; }
+
         [JsonProperty(PropertyName = "data")]
         public List<Leader> Users = new List<Leader>();
         [JsonProperty(PropertyName = "page")]
