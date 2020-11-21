@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EindProject.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -32,7 +33,13 @@ namespace EindProject
             if (this.changingEntryText) return;
 
             string token = e.NewTextValue;
-            if (token == resetText) return;
+            if (token == resetText)
+            {
+                App.Current.MainPage = new MainPage();
+
+                return;
+            }
+            if (!WakaTimeRepo.IsTokenValid(token)) return;
 
             this.changingEntryText = true;
 
