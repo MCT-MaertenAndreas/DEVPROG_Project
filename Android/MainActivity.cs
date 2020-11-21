@@ -10,7 +10,7 @@ using Android.OS;
 
 namespace EindProject.Droid
 {
-	[Activity (Label = "EindProject.Droid", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (Label = "WakaTime", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	[IntentFilter(
 		new [] { Android.Content.Intent.ActionView },
 		DataScheme = "https",
