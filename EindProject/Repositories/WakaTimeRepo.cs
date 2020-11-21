@@ -1,5 +1,6 @@
 ﻿using EindProject.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,6 +13,11 @@ namespace EindProject.Repositories
     public class WakaTimeRepo
     {
         private static string sBaseURL = "https://wakatime.com/";
+
+        public static bool IsTokenValid(string token)
+        {
+            return token.Length == 84 && token.StartsWith("sec_");
+        }
 
         public static async Task<Leaders> GetLeaders(uint page = 1)
         {
@@ -29,6 +35,38 @@ namespace EindProject.Repositories
             }
 
             return leaders;
+        }
+
+        public static async Task<User> GetCurrentUser()
+        {
+            string token = Preferences.Get("token", "");
+            if (!IsTokenValid(token)) return null;
+
+            const string sPath = "/api/v1/users/current";
+
+            User user;
+            using (var client = WakaTimeRepo.GetHttpClient())
+            {
+                string data;
+                try
+                {
+                    data = await client.GetStringAsync(WakaTimeRepo.sBaseURL + sPath);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+
+                if (data == null) return null;
+
+                JObject obj = JsonConvert.DeserializeObject<JObject>(data);
+
+                if (obj["data"] == null) return null;
+
+                user = obj["data"].ToObject<User>();
+            }
+
+            return user;
         }
 
         public static async Task<Stats> GetUserStats(string guid)
@@ -52,7 +90,10 @@ namespace EindProject.Repositories
         private static HttpClient GetHttpClient()
         {
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Preferences.Get("token", ""));
+
+            string token = Preferences.Get("token", "");
+            if (IsTokenValid(token))
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
             return client;
         }
