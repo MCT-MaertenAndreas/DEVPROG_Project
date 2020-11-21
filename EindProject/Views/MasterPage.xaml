@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:EindProject"
 			 x:Class="EindProject.MasterPage"
 			 Padding="0,40,0,0"
-			 IconImageSource="hamburger.png"
 			 Title="WakaTime Leaderboard">
     <StackLayout>
         <ListView x:Name="lvwNavigation" x:FieldModifier="public">
@@ -24,7 +23,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding Image}" />
-                            <Label Grid.Column="1" Text="{Binding Title}" />
+                            <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" Padding="5,0,0,0"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
