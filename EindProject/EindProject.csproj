@@ -10,13 +10,13 @@
 
   <ItemGroup>
     <None Remove="Assets\leaderboard.png" />
-    <None Remove="Assets\login.png" />
+    <None Remove="Assets\logout.png" />
     <None Remove="Assets\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\leaderboard.png" />
-    <EmbeddedResource Include="Assets\login.png" />
+    <EmbeddedResource Include="Assets\logout.png" />
     <EmbeddedResource Include="Assets\settings.png" />
   </ItemGroup>
 
@@ -49,5 +49,4 @@
       <DependentUpon>SettingsPage</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>
