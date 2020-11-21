@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.masterdetailpagenavigation">
-	<uses-sdk android:minSdkVersion="19" />
-	<application android:label="MasterDetailPageNavigation">
-	</application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="0.1.0" package="sh.damon.wakatime" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="25" android:targetSdkVersion="29" />
+	<application android:label="WakaTime"></application>
 </manifest>
