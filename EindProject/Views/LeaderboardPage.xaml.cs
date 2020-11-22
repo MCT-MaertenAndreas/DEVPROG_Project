@@ -1,5 +1,6 @@
 ﻿using EindProject.Models;
 using EindProject.Repositories;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace EindProject
@@ -21,6 +22,31 @@ namespace EindProject
 
             btnBack.Clicked += BtnBack_Clicked;
             btnNext.Clicked += BtnNext_Clicked;
+
+            srchUsers.SearchButtonPressed += SrchUsers_SearchButtonPressed;
+            srchUsers.TextChanged += SrchUsers_TextChanged;
+        }
+
+        private void SrchUsers_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (e.NewTextValue == string.Empty)
+            {
+                lvwLeaders.ItemsSource = this.leaders.Users;
+            }
+        }
+
+        private void SrchUsers_SearchButtonPressed(object sender, System.EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+
+            string search = searchBar.Text;
+
+            List<Leader> filteredLeaders = this.leaders.Users.FindAll(l => l.User.DisplayName.Contains(search));
+
+            if (filteredLeaders.Count > 0) lvwLeaders.ItemsSource = filteredLeaders;
+            else lvwLeaders.ItemsSource = this.leaders.Users;
+
+            
         }
 
         private void BtnBack_Clicked(object sender, System.EventArgs e)

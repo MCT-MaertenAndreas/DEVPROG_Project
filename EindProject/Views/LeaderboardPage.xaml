@@ -4,7 +4,7 @@
              x:Class="EindProject.LeaderboardPage"
              Title="Leaderboards">
     <StackLayout>
-        <SearchBar Placeholder="Search for users..." />
+        <SearchBar x:Name="srchUsers" Placeholder="Search for users..." />
 
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="0" Padding="5,5,5,0">
             <Grid.ColumnDefinitions>
