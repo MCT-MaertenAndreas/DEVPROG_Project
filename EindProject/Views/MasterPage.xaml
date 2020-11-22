@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:EindProject"
+             xmlns:local="using EindProject;"
 			 x:Class="EindProject.MasterPage"
-			 Padding="0,40,0,0"
+			 Padding="0,40,0,32"
 			 Title="WakaTime Leaderboard">
     <StackLayout>
-        <Grid Padding="20,0,10,20" IsVisible="false" x:Name="gridUser" x:FieldModifier="public">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="*"  />
-            </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+            <Grid HeightRequest="120" Padding="20,0,10,20" IsVisible="false" x:Name="gridUser" x:FieldModifier="public">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"  />
+                </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding Photo}" Margin="0,0,15,0"/>
-            <Label Grid.Row="0" Grid.Column="1" Text="{Binding DisplayName}" FontAttributes="Bold"/>
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Email}"/>
-        </Grid>
-        
-        <ListView x:Name="lvwNavigation" x:FieldModifier="public">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="5,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Image}" Margin="10,0,0,0"/>
-                            <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" Padding="5,0,0,0"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding Photo}" Margin="0,0,15,0"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding DisplayName}" FontAttributes="Bold"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Email}"/>
+            </Grid>
+        </StackLayout>
 
-        <Grid x:Name="gridLogout" x:FieldModifier="public" IsVisible="false" VerticalOptions="End" Padding="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <ListView x:Name="lvwNavigation" x:FieldModifier="public">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Image}" Margin="10,0,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" Padding="5,0,0,0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
+        <!-- We use rotation to force fill our ListView to be filled from bottom to top -->
+        <StackLayout Orientation="Horizontal" VerticalOptions="End">
+            <ListView x:Name="lvwBottomNavigation" x:FieldModifier="public" IsVisible="false" Rotation="180">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5,10" VerticalOptions="End" Rotation="180">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-            <Image Source="{Binding Image}" Margin="10,0,0,0"/>
-            <Label Grid.Column="1" Text="Logout" VerticalOptions="Center" Padding="5,0,0,0"/>
-        </Grid>
+                                <Image Source="{Binding Image}" Margin="10,0,0,0"/>
+                                <Label Grid.Column="1" Text="{Binding Title}" VerticalOptions="Center" Padding="5,0,0,0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

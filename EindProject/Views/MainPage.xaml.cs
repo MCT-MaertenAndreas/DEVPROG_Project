@@ -1,6 +1,7 @@
 ﻿using EindProject.Models;
 using EindProject.Repositories;
 using System;
+using System.Collections.Generic;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -31,19 +32,21 @@ namespace EindProject
             masterPage.gridUser.IsVisible = true;
             masterPage.gridUser.BindingContext = user;
 
-            masterPage.gridLogout.IsVisible = true;
-            masterPage.gridLogout.BindingContext = new NavigationItem
+            List<NavigationItem> bottomNav = new List<NavigationItem>();
+
+            bottomNav.Add(new NavigationItem
             {
+                Title = "Logout",
                 Image = ImageSource.FromResource("EindProject.Assets.logout.png")
-            };
+            });
 
-            var tgr = new TapGestureRecognizer();
-            tgr.Tapped += Logout_Tapped;
+            masterPage.lvwBottomNavigation.IsVisible = true;
+            masterPage.lvwBottomNavigation.ItemsSource = bottomNav;
 
-            masterPage.gridLogout.GestureRecognizers.Add(tgr);
+            masterPage.lvwBottomNavigation.ItemSelected += Logout_Tapped;
         }
 
-        private void Logout_Tapped(object sender, EventArgs e)
+        private void Logout_Tapped(object sender, SelectedItemChangedEventArgs e)
         {
             Preferences.Remove("token");
 
