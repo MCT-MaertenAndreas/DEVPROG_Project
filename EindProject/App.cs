@@ -1,4 +1,5 @@
-﻿using EindProject.Repositories;
+﻿using EindProject.Models;
+using EindProject.Repositories;
 using System;
 using System.Diagnostics;
 using Xamarin.Essentials;
@@ -10,6 +11,7 @@ namespace EindProject
 {
 	public class App : Application
 	{
+		public static CacheProvider cache = new CacheProvider();
 		public App ()
 		{
 			MainPage = new MainPage();
@@ -24,6 +26,8 @@ namespace EindProject
 
 				return;
             }
+
+			App.cache.RemoveAll();
 
 			Preferences.Set("token", token);
 
