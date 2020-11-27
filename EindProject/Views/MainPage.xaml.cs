@@ -48,6 +48,8 @@ namespace EindProject
 
         private void Logout_Tapped(object sender, SelectedItemChangedEventArgs e)
         {
+            App.cache.RemoveAll();
+
             Preferences.Remove("token");
 
             (Application.Current).MainPage = new MainPage();
