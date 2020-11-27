@@ -29,7 +29,7 @@ namespace EindProject
 
         private async void LoadContent()
         {
-            imgUser.Source = this.leader.User.Photo;
+            gridUserDetails.BindingContext = this.leader.User;
 
             this.stats = await WakaTimeRepo.GetUserStats(this.leader.User.Id);
         }
