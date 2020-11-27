@@ -1,6 +1,8 @@
 ﻿using EindProject.Models;
 using EindProject.Repositories;
+using System;
 using System.Collections.Generic;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace EindProject
@@ -8,16 +10,36 @@ namespace EindProject
     // [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LeaderboardPage : ContentPage
     {
+        private Leaderboard leaderboard = new Leaderboard();
         private Leaders leaders;
+
+        private uint maxPage = 50;
         private uint currentPage = 1;
-        private bool busy = false;
 
         public LeaderboardPage()
         {
             InitializeComponent();
 
-            this.LoadLeaderboard();
+            this.AddListeners();
 
+            this.leaderboard.Cache(this.maxPage);
+            this.LoadLeaderboard();
+        }
+
+        public LeaderboardPage(uint page)
+        {
+            this.currentPage = page;
+
+            InitializeComponent();
+
+            this.AddListeners();
+
+            this.leaderboard.Cache(this.maxPage);
+            this.LoadLeaderboard();
+        }
+
+        private void AddListeners()
+        {
             lvwLeaders.ItemTapped += LvwLeaders_ItemTapped;
 
             btnBack.Clicked += BtnBack_Clicked;
@@ -30,9 +52,7 @@ namespace EindProject
         private void SrchUsers_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue == string.Empty)
-            {
-                lvwLeaders.ItemsSource = this.leaders.Users;
-            }
+                this.LoadLeaderboard();
         }
 
         private void SrchUsers_SearchButtonPressed(object sender, System.EventArgs e)
@@ -41,17 +61,15 @@ namespace EindProject
 
             string search = searchBar.Text;
 
-            List<Leader> filteredLeaders = this.leaders.Users.FindAll(l => l.User.DisplayName.Contains(search));
+            List<Leader> filteredLeaders = this.leaderboard.Search(search);
 
             if (filteredLeaders.Count > 0) lvwLeaders.ItemsSource = filteredLeaders;
-            else lvwLeaders.ItemsSource = this.leaders.Users;
-
-            
+            else this.LoadLeaderboard();
         }
 
         private void BtnBack_Clicked(object sender, System.EventArgs e)
         {
-            if (this.busy || this.currentPage <= 1) return;
+            if (this.currentPage <= 1) return;
 
             this.currentPage--;
 
@@ -60,7 +78,7 @@ namespace EindProject
 
         private void BtnNext_Clicked(object sender, System.EventArgs e)
         {
-            if (this.busy) return;
+            if (this.currentPage >= 50) return;
 
             this.currentPage++;
 
@@ -69,29 +87,30 @@ namespace EindProject
 
         private void LvwLeaders_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Leader leader = this.leaders.Users[e.ItemIndex];
+            Leader leader = (Leader)e.Item;
+
+            lvwLeaders.SelectedItem = null;
 
             Navigation.PushAsync(new UserPage(leader));
         }
 
         private async void LoadLeaderboard()
         {
-            this.busy = true;
+            this.leaders = await this.leaderboard.GetPage(this.currentPage);
 
-            this.leaders = await WakaTimeRepo.GetLeaders(this.currentPage);
+            List<Leader> items = new List<Leader>();
+            this.leaders.Users.ForEach(l => items.Add(l));
 
             if (this.leaders.CurrentUser != null)
             {
                 // The display name is undefined due to the format
                 this.leaders.CurrentUser.User.DisplayName = this.leaders.CurrentUser.User.Username;
 
-                this.leaders.Users.Insert(0, this.leaders.CurrentUser);
+                items.Insert(0, this.leaders.CurrentUser);
             }
 
-            lvwLeaders.ItemsSource = this.leaders.Users;
+            lvwLeaders.ItemsSource = items;
             lblPage.Text = this.currentPage.ToString();
-
-            this.busy = false;
         }
     }
 }
