@@ -43,6 +43,8 @@ namespace EindProject
 
             this.changingEntryText = true;
 
+            App.cache.RemoveAll();
+
             Preferences.Set("token", token);
 
             Entry entry = (Entry)sender;
