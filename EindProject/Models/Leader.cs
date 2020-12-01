@@ -22,7 +22,7 @@ namespace EindProject.Models
     public class Leader
     {
         [JsonProperty(PropertyName = "rank")]
-        public int Rank { get; set; }
+        public Nullable<int> Rank { get; set; }
         [JsonProperty(PropertyName = "running_total")]
         public RunningTotal RunningTotal { get; set; }
         [JsonProperty(PropertyName = "user")]
