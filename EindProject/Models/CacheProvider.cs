@@ -15,7 +15,7 @@ namespace EindProject.Models
             this.cache = new MemoryCache(new MemoryCacheOptions { });
         }
 
-        public T Get<T>(string key)
+        internal T Get<T>(string key)
         {
             if (this.cache.TryGetValue(key, out T value))
                 return value;
@@ -38,9 +38,9 @@ namespace EindProject.Models
             this.keys.Clear();
         }
 
-        public void Set<T>(string key, T value)
+        internal void Set<T>(string key, T value)
         {
-            DateTimeOffset expiry = DateTimeOffset.Now.AddHours(12);
+            DateTimeOffset expiry = DateTimeOffset.Now.AddHours(2);
 
             this.keys.Add(key);
             this.cache.Set(key, value, expiry);
