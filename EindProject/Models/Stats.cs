@@ -7,16 +7,21 @@ namespace EindProject.Models
 {
     public class Stats
     {
-        [JsonProperty(PropertyName = "user_id")]
-        public Guid Guid { get; set; }
-        [JsonProperty(PropertyName = "username")]
-        public string Username { get; set; }
+        [JsonProperty(PropertyName = "categories")]
+        public List<Category> Categories { get; set; }
 
         [JsonProperty(PropertyName = "languages")]
         public List<Language> Languages { get; set; }
 
+        [JsonProperty(PropertyName = "username")]
+        public string Username { get; set; }
+
+        [JsonProperty(PropertyName = "user_id")]
+        public Guid Guid { get; set; }
+
         [JsonProperty(PropertyName = "human_readable_daily_average")]
         public string HumanReadableAverageDaily { get; set; }
+
         [JsonProperty(PropertyName = "human_readable_total")]
         public string HumanReadableTotal { get; set; }
 
