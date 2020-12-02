@@ -3,31 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="EindProject.UserPage">
-    <StackLayout>
-        <Grid x:Name="gridUserDetails" Padding="15,25">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <Grid x:Name="gridUserDetails" Padding="15,25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="45*" />
+                            <ColumnDefinition Width="65*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Source="{Binding User.Photo}"/>
-            <Label Grid.Column="1" Grid.Row="0" Text="{Binding User.DisplayName}" HeightRequest="60" FontSize="Medium"/>
-            <Label Grid.Column="1" Grid.Row="1" Text="Coding Activity (last 7 days)" FontAttributes="Bold"/>
-            <Label Grid.Column="1" Grid.Row="2" Text="{Binding RunningTotal.HumanReadableTotal}" />
-            <Label Grid.Column="1" Grid.Row="3" Text="Daily Average" FontAttributes="Bold" />
-            <Label Grid.Column="1" Grid.Row="4" Text="{Binding RunningTotal.HumanReadableAverageDaily}" />
-        </Grid>
+                        <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Source="{Binding User.Photo}" Margin="0,0,15,0"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding User.DisplayName}" HeightRequest="60" FontSize="Medium"/>
+                        <Label Grid.Column="1" Grid.Row="1" Text="Coding Activity (last 7 days)" FontAttributes="Bold"/>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding RunningTotal.HumanReadableTotal}" />
+                        <Label Grid.Column="1" Grid.Row="3" Text="Daily Average" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Grid.Row="4" Text="{Binding RunningTotal.HumanReadableAverageDaily}" />
+                    </Grid>
+                </StackLayout>
 
-        <StackLayout BackgroundColor="#efefef" HeightRequest="1"/>
+                <StackLayout BackgroundColor="#efefef" HeightRequest="1"/>
 
-        <StackLayout>
-            <Label Text="Categories" FontSize="Medium"/>
+                <StackLayout Padding="30">
+                    <Label Text="Categories" FontSize="Medium"/>
 
-            <microcharts:ChartView x:Name="chrtVwCategories"/>
-        </StackLayout>
-    </StackLayout>
+                    <microcharts:ChartView x:Name="chrtVwCategories" HeightRequest="300"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="#efefef" HeightRequest="1"/>
+
+                <StackLayout Padding="30">
+                    <Label Text="Editors" FontSize="Medium" />
+
+                    <microcharts:ChartView x:Name="chrtVwEditors" HeightRequest="300"/>
+                </StackLayout>
+
+                <StackLayout BackgroundColor="#efefef" HeightRequest="1"/>
+                
+                <StackLayout Padding="30">
+                    <Label Text="Languages" FontSize="Medium" />
+
+                    <microcharts:ChartView x:Name="chrtVwLanguages" MinimumHeightRequest="360"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
