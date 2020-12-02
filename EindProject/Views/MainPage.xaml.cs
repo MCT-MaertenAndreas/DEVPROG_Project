@@ -23,8 +23,6 @@ namespace EindProject
 
             if (access == NetworkAccess.Unknown || access == NetworkAccess.None || access == NetworkAccess.Local)
             {
-                Debug.WriteLine("NO NETWORK");
-
                 await DisplayAlert("Alert", "This application requires an internet connection.", "Ok");
 
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
@@ -44,8 +42,6 @@ namespace EindProject
 
         private async void SetUserContent()
         {
-            Debug.WriteLine("WE STILL WENT AND DID IT");
-
             User user = await WakaTimeRepo.GetCurrentUser();
 
             if (user == null) return;
