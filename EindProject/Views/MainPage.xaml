@@ -9,7 +9,7 @@
 	<MasterDetailPage.Detail>
 		<NavigationPage>
 			<x:Arguments>
-				<local:LeaderboardPage />
+				<local:EmptyLoading />
 			</x:Arguments>
 		</NavigationPage>
 	</MasterDetailPage.Detail>

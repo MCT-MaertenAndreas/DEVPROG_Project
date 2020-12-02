@@ -2,6 +2,7 @@
 using EindProject.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -13,6 +14,22 @@ namespace EindProject
         {
             InitializeComponent();
 
+            this.Init();
+        }
+
+        private async void Init()
+        {
+            NetworkAccess access = Connectivity.NetworkAccess;
+
+            if (access == NetworkAccess.Unknown || access == NetworkAccess.None || access == NetworkAccess.Local)
+            {
+                Debug.WriteLine("NO NETWORK");
+
+                await DisplayAlert("Alert", "This application requires an internet connection.", "Ok");
+
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+            }
+
             masterPage.lvwNavigation.ItemSelected += OnItemSelected;
 
             if (Device.RuntimePlatform == Device.UWP)
@@ -20,11 +37,15 @@ namespace EindProject
                 MasterBehavior = MasterBehavior.Popover;
             }
 
+            Detail = new NavigationPage(new LeaderboardPage());
+
             this.SetUserContent();
         }
 
         private async void SetUserContent()
         {
+            Debug.WriteLine("WE STILL WENT AND DID IT");
+
             User user = await WakaTimeRepo.GetCurrentUser();
 
             if (user == null) return;
