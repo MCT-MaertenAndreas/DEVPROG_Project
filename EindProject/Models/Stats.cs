@@ -10,6 +10,9 @@ namespace EindProject.Models
         [JsonProperty(PropertyName = "categories")]
         public List<Category> Categories { get; set; }
 
+        [JsonProperty(PropertyName = "editors")]
+        public List<Editor> Editors { get; set; }
+
         [JsonProperty(PropertyName = "languages")]
         public List<Language> Languages { get; set; }
 
