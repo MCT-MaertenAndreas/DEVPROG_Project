@@ -23,9 +23,9 @@ namespace EindProject
 
             if (access == NetworkAccess.Unknown || access == NetworkAccess.None || access == NetworkAccess.Local)
             {
-                await DisplayAlert("Alert", "This application requires an internet connection.", "Ok");
+                await DisplayAlert("Alert", "This application requires an internet connection.\nPressing Ok will close the application.", "Ok");
 
-                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                Process.GetCurrentProcess().Kill();
             }
 
             masterPage.lvwNavigation.ItemSelected += OnItemSelected;
@@ -57,30 +57,53 @@ namespace EindProject
                 Image = ImageSource.FromResource("EindProject.Assets.logout.png")
             });
 
+            bottomNav.Add(new NavigationItem
+            {
+                Title = "All Time Stats",
+                Image = ImageSource.FromResource("EindProject.Assets.all_time_stats.png"),
+                TargetType = typeof(AllTimeStatPage)
+            });
+
             masterPage.lvwBottomNavigation.IsVisible = true;
             masterPage.lvwBottomNavigation.ItemsSource = bottomNav;
 
-            masterPage.lvwBottomNavigation.ItemSelected += Logout_Tapped;
+            masterPage.lvwBottomNavigation.ItemSelected += BottomNavTapped;
         }
 
-        private void Logout_Tapped(object sender, SelectedItemChangedEventArgs e)
+        private async void BottomNavTapped(object sender, SelectedItemChangedEventArgs e)
         {
-            App.cache.RemoveAll();
+            NavigationItem item = e.SelectedItem as NavigationItem;
+            if (item == null) return;
 
-            Preferences.Remove("token");
+            if (item.Title == "Logout")
+            {
+                if (await DisplayAlert("Logout?", "Are you sure you want to logout?", "Yes, please", "No, please take me back"))
+                {
+                    App.cache.RemoveAll();
 
-            (Application.Current).MainPage = new MainPage();
+                    Preferences.Remove("token");
+
+                    (Application.Current).MainPage = new MainPage();
+                }
+
+                return;
+            }
+
+            this.OnItemSelected(sender, e);
         }
 
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as NavigationItem;
+            NavigationItem item = e.SelectedItem as NavigationItem;
             if (item != null)
             {
                 Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
-                masterPage.lvwNavigation.SelectedItem = null;
+                
                 IsPresented = false;
             }
+
+            masterPage.lvwNavigation.SelectedItem = null;
+            masterPage.lvwBottomNavigation.SelectedItem = null;
         }
     }
 }
