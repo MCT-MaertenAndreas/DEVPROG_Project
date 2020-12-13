@@ -78,6 +78,34 @@ namespace EindProject
                         Detail = new NavigationPage(new UserPage(MainPage.CurrentLeader));
 
                         break;
+                    case "Login":
+                        if (await DisplayAlert("Login", "You are about to be redirected.", "Continue", "Cancel"))
+                        {
+                            try
+                            {
+                                await Browser.OpenAsync(WakaTimeRepo.RedirectUrl, BrowserLaunchMode.External);
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Failed to start browser, the device might not have a browser installed.");
+
+                                break;
+                            }
+
+                            string result = await DisplayPromptAsync("Token", "Go To https://wakatime.damon.sh if you didn't get redirected.\n\nPut the login token in the field below after authenticating.", "Confirm", "Cancel");
+
+                            if (WakaTimeRepo.IsTokenValid(result))
+                            {
+                                App.cache.RemoveAll();
+
+                                Preferences.Set("token", result);
+
+                                (Application.Current).MainPage = new MainPage();
+                            }
+                            else DisplayAlert("Invalid Token", "An invalid WakaTime token has been inserted", "Ok");
+                        }
+
+                        break;
                     case "Logout":
                         if (await DisplayAlert("Logout?", "Are you sure you want to logout?", "Yes, please", "No, please take me back"))
                         {

@@ -46,12 +46,6 @@ namespace EindProject.Models
 
             if (MainPage.CurrentUser != null)
             {
-                bottomNavItems.Add(new NavigationItem
-                {
-                    Title = "Logout",
-                    Image = ImageSource.FromResource("EindProject.Assets.logout.png")
-                });
-
                 topNavItems.Add(new NavigationItem
                 {
                     Title = "All Time Stats",
@@ -75,9 +69,8 @@ namespace EindProject.Models
 
             bottomNavItems.Add(new NavigationItem
             {
-                Title = "Settings",
-                Image = ImageSource.FromResource("EindProject.Assets.settings.png"),
-                TargetType = typeof(SettingsPage)
+                Title = MainPage.CurrentUser == null ? "Login" : "Logout",
+                Image = ImageSource.FromResource("EindProject.Assets.logout.png")
             });
 
             this.topNav.ItemsSource = topNavItems;
