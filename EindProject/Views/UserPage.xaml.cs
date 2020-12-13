@@ -39,7 +39,12 @@ namespace EindProject
 
         public UserPage(Leader leader)
         {
+            if (string.IsNullOrEmpty(leader.User.DisplayName))
+                leader.User.DisplayName = leader.User.Username;
+
             this.leader = leader;
+
+            this.Title = "Viewing: " + leader.User.DisplayName;
 
             InitializeComponent();
 
@@ -75,8 +80,7 @@ namespace EindProject
 
             chrtVwCategories.Chart = new DonutChart
             {
-                Entries = entries,
-                LabelMode = LabelMode.RightOnly
+                Entries = entries
             };
 
             entries = new List<ChartEntry>();
@@ -96,8 +100,7 @@ namespace EindProject
 
             chrtVwEditors.Chart = new DonutChart
             {
-                Entries = entries,
-                LabelMode = LabelMode.RightOnly
+                Entries = entries
             };
 
             entries = new List<ChartEntry>();
@@ -123,6 +126,13 @@ namespace EindProject
                 Entries = entries,
                 LabelMode = LabelMode.RightOnly
             };
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                chrtVwCategories.Chart.LabelTextSize = 32;
+                chrtVwEditors.Chart.LabelTextSize = 32;
+                chrtVwLanguages.Chart.LabelTextSize = 32;
+            }
 
             this.stats = stats;
         }
