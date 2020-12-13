@@ -40,7 +40,7 @@ namespace EindProject.Models
 
         internal void Set<T>(string key, T value)
         {
-            DateTimeOffset expiry = DateTimeOffset.Now.AddHours(2);
+            DateTimeOffset expiry = DateTimeOffset.Now.AddMinutes(30);
 
             this.keys.Add(key);
             this.cache.Set(key, value, expiry);
