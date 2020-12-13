@@ -69,7 +69,7 @@ namespace EindProject.Repositories
 
         public static async Task<Stats> GetUserStats(string guid)
         {
-            string sPath = $"/api/v1/users/{guid}/stats";
+            string sPath = $"/api/v1/users/{guid}/stats/last_7_days";
             
             string data = await WakaTimeRepo.Get(sPath);
 
