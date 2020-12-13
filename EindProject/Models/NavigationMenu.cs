@@ -61,6 +61,13 @@ namespace EindProject.Models
 
                 topNavItems.Add(new NavigationItem
                 {
+                    Title = "Projects",
+                    Image = ImageSource.FromResource("EindProject.Assets.my_projects.png"),
+                    TargetType = typeof(MyProjectsPage)
+                });
+
+                topNavItems.Add(new NavigationItem
+                {
                     Title = "Profile",
                     Image = ImageSource.FromResource("EindProject.Assets.profile.png")
                 });

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EindProject.MyProjectsPage"
+             Title="My Projects">
+    <ContentPage.Content>
+        <StackLayout Padding="0,20">
+            <ListView x:Name="lvwProjects">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Padding="25,0,0,0" Grid.Row="0" Grid.Column="0" Text="{Binding Name}" FontSize="Medium" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                    <Label Padding="5,0,15,0" Grid.Row="0" Grid.Column="1" Text="{Binding Text}" FontSize="Medium" VerticalOptions="Center" FontAttributes="Bold"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
