@@ -62,8 +62,5 @@
     <Compile Update="Views\LeaderboardPage.xaml.cs">
       <DependentUpon>LeaderboardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>
