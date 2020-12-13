@@ -4,7 +4,7 @@
              x:Class="EindProject.EmptyLoading">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Empty Loading Page"
+            <Label Text="No connection to the internet, please connect to WiFi before continuing."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
