@@ -15,6 +15,8 @@ namespace EindProject.Repositories
     {
         private static string BaseURL = "https://wakatime.com/";
 
+        internal readonly static string RedirectUrl = "https://wakatime.com/oauth/authorize?client_id=sFzQIUPu7zp6xHDBzjA9IASP&response_type=token&redirect_uri=https%3A%2F%2Fwakatime.damon.sh&scope=read_logged_time,email,read_stats";
+
         public static bool IsTokenValid(string token)
         {
             return token.Length == 84 && token.StartsWith("sec_");
