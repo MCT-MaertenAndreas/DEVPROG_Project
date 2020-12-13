@@ -49,6 +49,24 @@ namespace EindProject.Repositories
             return obj["data"].ToObject<User>();
         }
 
+        public static async Task<AllTimeStats> GetCurrentUserAllTimeStats()
+        {
+            string token = Preferences.Get("token", "");
+            if (!IsTokenValid(token)) return null;
+
+            const string sPath = "/api/v1/users/current/all_time_since_today";
+
+            string data = await WakaTimeRepo.Get(sPath);
+
+            if (data == null) return null;
+
+            JObject obj = JsonConvert.DeserializeObject<JObject>(data);
+
+            if (obj["data"] == null) return null;
+
+            return obj["data"].ToObject<AllTimeStats>();
+        }
+
         public static async Task<Stats> GetUserStats(string guid)
         {
             string sPath = $"/api/v1/users/{guid}/stats";
