@@ -8,8 +8,11 @@ It uses the WakaTime public API and some functionality has been built into the a
 ## Requirements
 
 - Visual Studio 2019
-- Android 10 (there are some problems with signing the application for Android 11)
-- Or Windows (UWP)
+
+## Support
+
+- Android 7 to 11+
+- Windows (UWP)
 
 ## Licensing
 
