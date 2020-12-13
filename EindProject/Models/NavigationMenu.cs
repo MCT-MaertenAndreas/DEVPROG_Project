@@ -58,6 +58,12 @@ namespace EindProject.Models
                     Image = ImageSource.FromResource("EindProject.Assets.all_time_stats.png"),
                     TargetType = typeof(AllTimeStatPage)
                 });
+
+                topNavItems.Add(new NavigationItem
+                {
+                    Title = "Profile",
+                    Image = ImageSource.FromResource("EindProject.Assets.profile.png")
+                });
             }
 
             bottomNavItems.Add(new NavigationItem

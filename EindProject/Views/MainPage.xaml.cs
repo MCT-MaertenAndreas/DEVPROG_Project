@@ -13,6 +13,7 @@ namespace EindProject
     {
         public readonly static NavigationMenu NavMenu = new NavigationMenu();
         public static User CurrentUser;
+        public static Leader CurrentLeader;
 
         public MainPage()
         {
@@ -58,6 +59,9 @@ namespace EindProject
                 masterPage.gridUser.IsVisible = true;
                 masterPage.gridUser.BindingContext = MainPage.CurrentUser;
             }
+
+            Leaders leaders = await WakaTimeRepo.GetLeaders();
+            MainPage.CurrentLeader = leaders.CurrentUser;
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -71,7 +75,7 @@ namespace EindProject
                 switch (item.Title)
                 {
                     case "Profile":
-                        Navigation.PushAsync(new UserPage(MainPage.CurrentUser));
+                        Detail = new NavigationPage(new UserPage(MainPage.CurrentLeader));
 
                         break;
                     case "Logout":
