@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EindProject.AllTimeStatPage"
+             Title="WakaTime All Time Stats">
+    <ContentPage.Content>
+        <StackLayout Padding="25">
+            <StackLayout x:Name="layoutStatsCalculating">
+                <Label Text="Your all time stats are being calculated, come back later..."/>
+
+                <ActivityIndicator Margin="0,50" IsRunning="True" HorizontalOptions="Center"/>
+            </StackLayout>
+
+            <StackLayout x:Name="layoutStats" IsVisible="False">
+                <Grid x:Name="grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="You have coded for" FontSize="Medium" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Text}" FontSize="Medium" FontAttributes="Bold" />
+                </Grid>
+
+                <StackLayout>
+                    <Label Text="This would equal to"/>
+
+                    <Label Text=""/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
