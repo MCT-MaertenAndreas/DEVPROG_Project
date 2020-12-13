@@ -3,6 +3,7 @@ using EindProject.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -10,9 +11,14 @@ namespace EindProject
 {
     public partial class MainPage : MasterDetailPage
     {
+        public readonly static NavigationMenu NavMenu = new NavigationMenu();
+        public static User CurrentUser;
+
         public MainPage()
         {
             InitializeComponent();
+
+            NavMenu.SetMasterPage(masterPage);
 
             this.Init();
         }
@@ -29,6 +35,7 @@ namespace EindProject
             }
 
             masterPage.lvwNavigation.ItemSelected += OnItemSelected;
+            masterPage.lvwBottomNavigation.ItemSelected += OnItemSelected;
 
             if (Device.RuntimePlatform == Device.UWP)
             {
@@ -37,71 +44,53 @@ namespace EindProject
 
             Detail = new NavigationPage(new LeaderboardPage());
 
-            this.SetUserContent();
+            await this.SetUserContent();
+
+            NavMenu.LoadNavigation();
         }
 
-        private async void SetUserContent()
+        private async Task SetUserContent()
         {
-            User user = await WakaTimeRepo.GetCurrentUser();
+            MainPage.CurrentUser = await WakaTimeRepo.GetCurrentUser();
 
-            if (user == null) return;
-
-            masterPage.gridUser.IsVisible = true;
-            masterPage.gridUser.BindingContext = user;
-
-            List<NavigationItem> bottomNav = new List<NavigationItem>();
-
-            bottomNav.Add(new NavigationItem
+            if (MainPage.CurrentUser != null)
             {
-                Title = "Logout",
-                Image = ImageSource.FromResource("EindProject.Assets.logout.png")
-            });
-
-            bottomNav.Add(new NavigationItem
-            {
-                Title = "All Time Stats",
-                Image = ImageSource.FromResource("EindProject.Assets.all_time_stats.png"),
-                TargetType = typeof(AllTimeStatPage)
-            });
-
-            masterPage.lvwBottomNavigation.IsVisible = true;
-            masterPage.lvwBottomNavigation.ItemsSource = bottomNav;
-
-            masterPage.lvwBottomNavigation.ItemSelected += BottomNavTapped;
+                masterPage.gridUser.IsVisible = true;
+                masterPage.gridUser.BindingContext = MainPage.CurrentUser;
+            }
         }
 
-        private async void BottomNavTapped(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             NavigationItem item = e.SelectedItem as NavigationItem;
             if (item == null) return;
 
-            if (item.Title == "Logout")
+            if (item.TargetType != null) Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+            else
             {
-                if (await DisplayAlert("Logout?", "Are you sure you want to logout?", "Yes, please", "No, please take me back"))
+                switch (item.Title)
                 {
-                    App.cache.RemoveAll();
+                    case "Profile":
+                        Navigation.PushAsync(new UserPage(MainPage.CurrentUser));
 
-                    Preferences.Remove("token");
+                        break;
+                    case "Logout":
+                        if (await DisplayAlert("Logout?", "Are you sure you want to logout?", "Yes, please", "No, please take me back"))
+                        {
+                            App.cache.RemoveAll();
 
-                    (Application.Current).MainPage = new MainPage();
+                            Preferences.Remove("token");
+
+                            (Application.Current).MainPage = new MainPage();
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
-
-                return;
             }
-
-            this.OnItemSelected(sender, e);
-        }
-
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            NavigationItem item = e.SelectedItem as NavigationItem;
-            if (item != null)
-            {
-                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
                 
-                IsPresented = false;
-            }
-
+            IsPresented = false;
             masterPage.lvwNavigation.SelectedItem = null;
             masterPage.lvwBottomNavigation.SelectedItem = null;
         }

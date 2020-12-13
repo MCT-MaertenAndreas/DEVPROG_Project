@@ -4,7 +4,7 @@
              xmlns:local="using EindProject;"
 			 x:Class="EindProject.MasterPage"
 			 Padding="0,40,0,32"
-			 Title="WakaTime Leaderboard">
+			 Title="WakaTime">
     <StackLayout>
         <StackLayout Orientation="Horizontal" VerticalOptions="Start">
             <Grid HeightRequest="120" Padding="20,0,10,20" IsVisible="false" x:Name="gridUser" x:FieldModifier="public">
@@ -40,7 +40,7 @@
 
         <!-- We use rotation to force fill our ListView to be filled from bottom to top -->
         <StackLayout Orientation="Horizontal" VerticalOptions="End">
-            <ListView x:Name="lvwBottomNavigation" x:FieldModifier="public" IsVisible="false" Rotation="180">
+            <ListView x:Name="lvwBottomNavigation" x:FieldModifier="public" Rotation="180">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
