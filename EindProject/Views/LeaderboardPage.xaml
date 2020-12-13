@@ -35,7 +35,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0" Text="{Binding Rank}" HorizontalTextAlignment="Center"/>
-                                <Label Grid.Column="1" Text="{Binding User.DisplayName}"/>
+                                <Label Grid.Column="1" Text="{Binding User.DisplayName}" LineBreakMode="TailTruncation"/>
                                 <Label Grid.Column="2" Text="{Binding RunningTotal.HumanReadableTotal}"/>
                                 <Label Grid.Column="3" Text="{Binding RunningTotal.HumanReadableAverageDaily}"/>
                             </Grid>
