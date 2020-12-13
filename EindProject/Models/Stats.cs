@@ -16,6 +16,9 @@ namespace EindProject.Models
         [JsonProperty(PropertyName = "languages")]
         public List<Language> Languages { get; set; }
 
+        [JsonProperty(PropertyName = "projects")]
+        public List<Project> Projects { get; set; }
+
         [JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
