@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\all_time_stats.png" />
     <None Remove="Assets\leaderboard.png" />
     <None Remove="Assets\logout.png" />
     <None Remove="Assets\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\all_time_stats.png" />
     <EmbeddedResource Include="Assets\leaderboard.png" />
     <EmbeddedResource Include="Assets\logout.png" />
     <EmbeddedResource Include="Assets\settings.png" />
@@ -29,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Views\AllTimeStatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\EmptyLoading.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
