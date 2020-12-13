@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EindProject.AllTimeStatPage"
-             Title="WakaTime All Time Stats">
+             Title="Your All Time Stats">
     <ContentPage.Content>
         <StackLayout Padding="25">
             <StackLayout x:Name="layoutStatsCalculating">
@@ -17,17 +17,42 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="You have coded for" FontSize="Medium" />
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Text}" FontSize="Medium" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="You coded for" FontSize="Medium" VerticalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Text}" FontSize="Medium" VerticalOptions="Center" FontAttributes="Bold" />
                 </Grid>
 
+                <StackLayout HeightRequest="1" Background="#efefef" Margin="-25,10"></StackLayout>
+                
                 <StackLayout>
-                    <Label Text="This would equal to"/>
+                    <Label Text="This would equal" FontSize="15" FontAttributes="Bold"/>
 
-                    <Label Text=""/>
+                    <ListView x:Name="lvwComparisons" Margin="-25,10">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="40"/>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding A1}" VerticalOptions="Center" Padding="25,0,0,0"/>
+                                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding A2}" VerticalOptions="Center" FontAttributes="Bold"/>
+                                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding A3}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
